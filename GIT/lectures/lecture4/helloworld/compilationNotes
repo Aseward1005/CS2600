@@ -1,0 +1,6 @@
+gcc can compile to object files using gcc -c filename
+then you can do the final compilation using gcc filename.o -o executablename
+
+gcc can also compile straight to executatble using gcc filename -o executablename
+
+if you don't pick an executable name, it will default to a (a.out on mac/linux, a.exe on windows)
