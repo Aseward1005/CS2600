@@ -1,0 +1,2 @@
+This is testing for fprintf
+This iis testing for fputs
