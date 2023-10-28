@@ -32,5 +32,28 @@ int main(void){
     else
         printf("Tony Bobcat not found in the record\n");
 
+
+    //search by phone number
+    char* nums[] = {"909-555-2134", "1"};
+    for (int i = 0; i < 2; i++) {
+        matchPtr = searchEmployeeByPhoneNumber(EmployeeTable, EmployeeTableEntries, nums[i]);
+
+        if (matchPtr != NULL)
+            printf("Phone number %s found in record at position %d\n", nums[i], matchPtr - EmployeeTable);
+        else
+            printf("Phone number %s not found in the record\n", nums[i]);
+    }
+
+    //search by salary
+    double sals[] = {7.80, 1};
+    for (int i = 0; i < 2; i++) {
+        matchPtr = searchEmployeeBySalary(EmployeeTable, EmployeeTableEntries, sals[i]);
+
+        if (matchPtr != NULL)
+            printf("Salary %f found in record at position %d\n", sals[i], matchPtr - EmployeeTable);
+        else
+            printf("Salary %f not found in the record\n", sals[i]);
+    }
+
     return EXIT_SUCCESS;
 }
