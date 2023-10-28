@@ -6,6 +6,8 @@ int main(void){
     //defined in employeeone
     PtrToEmployee searchEmployeeByNumber(const Employee table[], int sizeTable, long numberToFind);
     PtrToEmployee searchEmployeeByName(PtrToConstEmployee ptr, int tableSize, char* targetName);
+    PtrToEmployee searchEmployeeByPhoneNumber(PtrToConstEmployee ptr, int tableSize, char* targetNum);
+    PtrToEmployee searchEmployeeBySalary(PtrToConstEmployee ptr, int tableSize, double targetSalary);
     
     //defined in employeetable
     extern Employee EmployeeTable[];
