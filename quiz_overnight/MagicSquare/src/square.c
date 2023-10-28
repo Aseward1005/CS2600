@@ -3,7 +3,6 @@
 #include <time.h>
 
 #define SIZE 3
-#define MAX 9
 
 void squareGen(int matrix[SIZE][SIZE]);
 int checkSquare(int matrix[SIZE][SIZE]);
