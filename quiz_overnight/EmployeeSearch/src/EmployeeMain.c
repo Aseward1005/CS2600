@@ -4,7 +4,7 @@
 
 int main(void){
     //defined in employeeone
-    PtrToEmployee searchEmployeeByNymber(const Employee table[], int sizeTable, long numberToFind);
+    PtrToEmployee searchEmployeeByNumber(const Employee table[], int sizeTable, long numberToFind);
     PtrToEmployee searchEmployeeByName(PtrToConstEmployee ptr, int tableSize, char* targetName);
     
     //defined in employeetable
@@ -15,7 +15,7 @@ int main(void){
     PtrToEmployee matchPtr;
 
     //search by number
-    matchPtr = searchEmployeeByNymber(EmployeeTable, EmployeeTableEntries, 1045);
+    matchPtr = searchEmployeeByNumber(EmployeeTable, EmployeeTableEntries, 1045);
 
     //employee 1045 does not exist
     if (matchPtr != NULL)
