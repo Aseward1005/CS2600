@@ -7,13 +7,24 @@ PtrToEmployee searchEmployeeByNumber(PtrToConstEmployee ptr, int tableSize, long
     for(;ptr < endPtr; ptr++)  //search until end of table
     { 
         if (ptr->number == targetNumber) //check if it equals the Employee number 
-        return (PtrToEmployee) ptr; //return location of the number to callee. 
+            return (PtrToEmployee) ptr; //return location of the number to callee. 
     } 
 
     return NULL;  //this will only happen if no Employee number matches in loop above 
 } 
 
- 
+//addition for quiz 2
+PtrToEmployee searchEmployeeByNumber(PtrToConstEmployee ptr, int tableSize, double targetSalary){ 
+    const PtrToConstEmployee endPtr = ptr + tableSize; 
+
+    for(;ptr < endPtr; ptr++)  //search until end of table
+    { 
+        if (ptr->number == targetSalary) //check if it equals the Employee number 
+            return (PtrToEmployee) ptr; //return location of the number to callee. 
+    } 
+
+    return NULL;  //this will only happen if no Employee number matches in loop above 
+}  
 
 //Essentially the same functionality as above but comparing strings to check if equal 
 
@@ -23,8 +34,24 @@ PtrToEmployee searchEmployeeByName(PtrToConstEmployee ptr, int tableSize, char* 
     for(; ptr < endPtr; ptr++) 
     { 
         if (strcmp(ptr->name,targetName) == 0) 
-        return (PtrToEmployee) ptr; 
+            return (PtrToEmployee) ptr; 
     } 
 
     return NULL; 
 } 
+
+//addition for quiz 2, exactly the same as searching by name
+PtrToEmployee searchEmployeeByPhoneNumber(PtrToConstEmployee ptr, int tableSize, char* phoneNumber){ 
+    const PtrToConstEmployee endPtr = ptr + tableSize; 
+
+    for(; ptr < endPtr; ptr++) 
+    { 
+        if (strcmp(ptr->name, phoneNumber) == 0) 
+            return (PtrToEmployee) ptr; 
+    } 
+
+    return NULL; 
+} 
+
+
+
