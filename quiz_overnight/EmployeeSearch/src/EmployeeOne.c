@@ -14,12 +14,12 @@ PtrToEmployee searchEmployeeByNumber(PtrToConstEmployee ptr, int tableSize, long
 } 
 
 //addition for quiz 2
-PtrToEmployee searchEmployeeByNumber(PtrToConstEmployee ptr, int tableSize, double targetSalary){ 
+PtrToEmployee searchEmployeeBySalary(PtrToConstEmployee ptr, int tableSize, double targetSalary){ 
     const PtrToConstEmployee endPtr = ptr + tableSize; 
 
     for(;ptr < endPtr; ptr++)  //search until end of table
     { 
-        if (ptr->number == targetSalary) //check if it equals the Employee number 
+        if (ptr->salary == targetSalary) //check if it equals the Employee number 
             return (PtrToEmployee) ptr; //return location of the number to callee. 
     } 
 
@@ -46,7 +46,7 @@ PtrToEmployee searchEmployeeByPhoneNumber(PtrToConstEmployee ptr, int tableSize,
 
     for(; ptr < endPtr; ptr++) 
     { 
-        if (strcmp(ptr->name, phoneNumber) == 0) 
+        if (strcmp(ptr->phone, phoneNumber) == 0) 
             return (PtrToEmployee) ptr; 
     } 
 
