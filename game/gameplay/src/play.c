@@ -7,7 +7,7 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 
-#define PORT 8888
+#define PORT 8080
 #define MAX_LEN 1024
 
 int main()
@@ -20,7 +20,7 @@ int main()
     struct mosquitto* client = mosquitto_new(id, clean_session, callbackPtr);
 
     //connect to client
-    const char* host = "localhost";
+    const char* host = "anthonyseward.duckdns.org";
     const int port = 1883;
     const int keepalive = 5;
 
@@ -73,7 +73,7 @@ int main()
 
     //GAME SETUP
     FILE *desc;
-    char* startpoint = "/home/freerunnerx5/CS2600/game/setting";
+    char* startpoint = "/home/anthony_seward1005/CS2600/game/setting";
     if (chdir(startpoint) != 0) {
         perror("Error changing to initial directory");
         return 1;
@@ -91,7 +91,7 @@ int main()
         desc = fopen("desc.txt", "r");
         fgets(description, sizeof(description), desc);
         fclose(desc);
-
+	write(connfd, description, strlen(description));
         mosquitto_publish(client, NULL, topic, strlen(description), description, 0, false);
 
         //receive message from peer 1
@@ -99,10 +99,12 @@ int main()
         //null terminate to treat this as a string
         message[bytesRead] = '\0';
         length = strlen(message);
-        printf("%d", length);
+        //printf("%d", length);
+	//get rid of newline if its there
         if (len > 0 && message[length-1] == '\n')
             message[length - 1] = '\0';
-        if (chdir(message) != 0) {
+        //if the directory doesnt exist, say invalid
+	if (chdir(message) != 0) {
             char current_directory[256];
             if (getcwd(current_directory, sizeof(current_directory)) != NULL) {
                 printf("Current Working Directory: %s\n", current_directory);
@@ -112,12 +114,12 @@ int main()
             }
             perror("error changing to target directory");
             fprintf(stderr, "attempted to change to: %s\n", message);
-            return 1;
+            //return 1;
             mosquitto_publish(client, NULL, topic, strlen(invalid), invalid, 0, false);
             sleep(invalidTime);
         }
 
-        printf("%s", message);
+        //printf("%s", message);
 
         //send acknowledgment to the first player
         strcpy(message, "received\n");
