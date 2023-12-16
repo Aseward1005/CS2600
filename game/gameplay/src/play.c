@@ -43,6 +43,10 @@ int main()
         exit(EXIT_FAILURE);
     }
     
+    //make sure there is no keep alive mechanism
+    int keepAlive = 0;
+    setsockopt(sockfd, SOL_SOCKET, SO_KEEPALIVE, &keepAlive, sizeof(int));
+
     memset(&servaddr, 0, sizeof(servaddr));
 
     //fill server info
@@ -86,12 +90,14 @@ int main()
 
     char message[MAX_LEN];
     char description[MAX_LEN];
+
+    //allow 1 second for any desync
     while (message != "q") {
         //publish the description of the room
         desc = fopen("desc.txt", "r");
         fgets(description, sizeof(description), desc);
         fclose(desc);
-	write(connfd, description, strlen(description));
+	//write(connfd, description, strlen(description));
         mosquitto_publish(client, NULL, topic, strlen(description), description, 0, false);
 
         //receive message from peer 1
@@ -101,8 +107,8 @@ int main()
         length = strlen(message);
         //printf("%d", length);
 	//get rid of newline if its there
-        if (len > 0 && message[length-1] == '\n')
-            message[length - 1] = '\0';
+       	//if (len > 0 && message[length-1] == '\n')
+            //message[length - 1] = '\0';
         //if the directory doesnt exist, say invalid
 	if (chdir(message) != 0) {
             char current_directory[256];
@@ -123,7 +129,7 @@ int main()
 
         //send acknowledgment to the first player
         strcpy(message, "received\n");
-        write(connfd, message, strlen(message));
+        //write(connfd, message, strlen(message));
     }
 
     close(sockfd);
